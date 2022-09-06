@@ -1,6 +1,11 @@
-const express =require("express")
-const app=express()
-const port=process.env.port || 5000
+const express = require('express');
 
-// Listen on enviroment port or 5000
-app.listen(port, () => console.log(`Listen on port ${port}`))
+const  getAllStudents  = require('../controller/index.js');
+
+const router = express.Router();
+
+router.get('/', getAllStudents);
+router.get('/getAll', getAllStudents);
+
+
+module.exports=router;

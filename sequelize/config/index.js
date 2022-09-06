@@ -6,6 +6,6 @@ const pool = mysql.createPool({
     user            : 'root',
     password        : '',
     database        : 'cms'
-})
+});
 
-module.exports.pool = pool
+module.exports = pool;
