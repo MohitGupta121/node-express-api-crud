@@ -1,5 +1,5 @@
-const express = require('express');
-const pool =  require('../config/index.js');
+import express from 'express';
+import pool from '../config/index.js';
 const router = express.Router();
 
 const getAllStudents = async (req, res) => {
@@ -20,4 +20,4 @@ const getAllStudents = async (req, res) => {
     })
 }
 
-module.exports = getAllStudents;
+export default getAllStudents;

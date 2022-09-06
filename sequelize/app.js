@@ -1,8 +1,10 @@
-const express =require("express")
-const app=express()
-const allStudents =  require('./routes/routes.js');
+import express from "express"
+import allStudents from './routes/routes.js'
 
-const port=process.env.port || 7000
+const app=express()
+
+
+const port=process.env.port || 900
 
 app.use('/getAll', allStudents);
 
