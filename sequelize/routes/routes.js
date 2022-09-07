@@ -1,9 +1,9 @@
 import express from 'express';
-import  getAllStudents from '../controller/index.js';
+import  controller from '../controller/index.js';
 const router = express.Router();
 
-router.get('/', getAllStudents);
-router.get('/getAll', getAllStudents);
+// router.get('/', getAllStudents);
+router.get('/', controller.getAllStudents)
 
 
 export default router;
