@@ -1,21 +1,25 @@
 export default (sequelize, DataTypes) => {
+  const student = sequelize.define(
+    "testings",
+    {
+      name: {
+        type: DataTypes.STRING,
+      },
+      lastname: {
+        type: DataTypes.STRING,
+      },
+      enroll: {
+        type: DataTypes.STRING,
+      },
+      mobile: {
+        type: DataTypes.STRING,
+      },
+    },
+    {
+      createdAt: false,
+      updatedAt: false,
+    }
+  );
 
-    const student = sequelize.define("student", {
-        name: {
-            type: DataTypes.STRING
-        },
-        lastname: {
-            type: DataTypes.STRING
-        },
-        enroll: {
-            type: DataTypes.STRING
-        },
-        mobile: {
-            type: DataTypes.STRING
-        },
-    
-    })
-
-    return student
-
-}
+  return student;
+};

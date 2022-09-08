@@ -1,22 +1,12 @@
-import express from "express"
-import router from './routes/routes.js'
+import express from "express";
+import router from "./routes/routes.js";
 
-const app=express()
+const app = express();
 
-
-
-
-// app.use('/getAll', allStudents);
-
-// app.get('/', (req, res) => {
-//     res.send('hello to the remote server');
-//   });
+app.use(express.json());
 
 // Routers
-app.use('/', router);
+app.use("/", router);
 
-
-
-const port=process.env.port || 8000
-app.listen(port, () => console.log(`Listen on port ${port}`))
-
+const port = process.env.port || 8000;
+app.listen(port, () => console.log(`Listen on port ${port}`));

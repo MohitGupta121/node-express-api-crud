@@ -1,32 +1,28 @@
-import express from 'express';
-import db from '../model/index.js';
-import pool from '../config/index.js';
-const router = express.Router();
+import db from "../model/index.js";
 
-// const getAllStudents = async (req, res) => {
-//     pool.getConnection((err, connection) => {
-//         if(err) throw err
-//         console.log(`connected as id ${connection.threadId}`)
+const Student = db.students;
 
-//         connection.query('SELECT * from student', (err, rows) => {
-//             connection.release() // return the connection to pool
+// 1. create product
 
-//             if(!err) {
-//                 res.send(rows)
-//             } else {
-//                 console.log(err)
-//             }
+const addStudent = async (req, res) => {
+  const info = {
+    name: req.body.name,
+    lastname: req.body.lastname,
+    enroll: req.body.enroll,
+    mobile: req.body.mobile,
+  };
 
-//         })
-//     })
-// }
+  try {
+    const student = await Student.create(info);
+    res.status(200).send(student);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const Student = db.student
-Student.sync({ force: true })
 const getAllStudents = async (req, res) => {
-    let students = await Student.findAll();
-    res.status(200).send(students);
-}
+  let students = await Student.findAll();
+  res.status(200).send(students);
+};
 
-
-export default {getAllStudents};
+export default { addStudent, getAllStudents };
