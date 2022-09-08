@@ -35,8 +35,16 @@ const getSingleStudent = async (req, res) => {
     let student = await Student.findOne({ where: { id: id } });
     res.status(200).send(student);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
-export default { addStudent, getAllStudents, getSingleStudent };
+// 4. update Student
+
+const updateStudent = async (req, res) => {
+  let id = req.params.id;
+  const student = await Student.update(req.body, { where: { id: id } });
+  res.status(200).send(student);
+};
+
+export default { addStudent, getAllStudents, getSingleStudent, updateStudent };
