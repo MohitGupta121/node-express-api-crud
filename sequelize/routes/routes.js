@@ -6,4 +6,7 @@ router.post("/addNewStudent", controller.addStudent);
 
 router.get("/getAll", controller.getAllStudents);
 
+router.get("/:id", controller.getSingleStudent);
+
+
 export default router;

@@ -2,7 +2,7 @@ import db from "../model/index.js";
 
 const Student = db.students;
 
-// 1. create product
+// 1. create student
 
 const addStudent = async (req, res) => {
   const info = {
@@ -20,9 +20,23 @@ const addStudent = async (req, res) => {
   }
 };
 
+// 2. get All Students
+
 const getAllStudents = async (req, res) => {
   let students = await Student.findAll();
   res.status(200).send(students);
 };
 
-export default { addStudent, getAllStudents };
+// 3. get single student
+
+const getSingleStudent = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let student = await Student.findOne({ where: { id: id } });
+    res.status(200).send(student);
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export default { addStudent, getAllStudents, getSingleStudent };
