@@ -1,13 +1,11 @@
 import db from "../model/index.js";
 
 // image Upload
-import multer from 'multer'
-import * as path from 'path';
-
+import multer from "multer";
+import * as path from "path";
 
 const Student = db.students;
 const Image = db.image;
-
 
 // 1. create student
 
@@ -61,22 +59,20 @@ const updateStudent = async (req, res) => {
 // 5. delete student by id
 
 const deleteStudent = async (req, res) => {
-    try {
-        let id = req.params.id;
-        await Student.destroy({ where: { id: id } });
-        res.status(200).send("Student is deleted !"); 
-    } catch (error) {
-        console.log(error)
-    }
+  try {
+    let id = req.params.id;
+    await Student.destroy({ where: { id: id } });
+    res.status(200).send("Student is deleted !");
+  } catch (error) {
+    console.log(error);
+  }
 };
-
 
 // 8. Upload Image
 
 const addImage = async (req, res) => {
-
   const info = {
-    image: req.file.path
+    image: req.file.path,
   };
 
   try {
@@ -87,44 +83,40 @@ const addImage = async (req, res) => {
   }
 };
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, 'Images')
+    cb(null, "Images");
   },
   filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname))
-  }
-})
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: '1000000' },
+  limits: { fileSize: "1000000" },
   fileFilter: (req, file, cb) => {
-      const fileTypes = /jpeg|jpg|png|gif/
-      const mimeType = fileTypes.test(file.mimetype)  
-      const extname = fileTypes.test(path.extname(file.originalname))
+    const fileTypes = /jpeg|jpg|png|gif|mp4/;
+    const mimeType = fileTypes.test(file.mimetype);
+    const extname = fileTypes.test(path.extname(file.originalname));
 
-      if(mimeType && extname) {
-          return cb(null, true)
-      }
-      cb('Give proper files formate to upload')
-  }
-}).single('image')
-
+    if (mimeType && extname) {
+      return cb(null, true);
+    }
+    cb("Give proper files formate to upload");
+  },
+}).single("image");
 
 const getImage = async (req, res) => {
   try {
     let id = req.params.id;
     let image = await Image.findOne({ where: { id: id } });
     // res.status(200).send(image);
-    res.send(`<img src=http://localhost:8000/${image.image}>`)
+    res.send(`<img src=http://localhost:8000/${image.image}>`);
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 export default {
   addStudent,
@@ -134,5 +126,5 @@ export default {
   deleteStudent,
   upload,
   addImage,
-  getImage
+  getImage,
 };
