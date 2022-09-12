@@ -117,7 +117,8 @@ const getImage = async (req, res) => {
   try {
     let id = req.params.id;
     let image = await Image.findOne({ where: { id: id } });
-    res.status(200).send(image);
+    // res.status(200).send(image);
+    res.send(`<img src=http://localhost:8000/${image.image}>`)
   } catch (error) {
     console.log(error);
   }
