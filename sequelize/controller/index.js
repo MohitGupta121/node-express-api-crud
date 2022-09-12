@@ -1,6 +1,13 @@
 import db from "../model/index.js";
 
+// image Upload
+import multer from 'multer'
+import * as path from 'path';
+
+
 const Student = db.students;
+const Image = db.image;
+
 
 // 1. create student
 
@@ -63,10 +70,58 @@ const deleteStudent = async (req, res) => {
     }
 };
 
+
+// 8. Upload Image
+
+const addImage = async (req, res) => {
+
+  const info = {
+    image: req.file.path
+  };
+
+  try {
+    const image = await Image.create(info);
+    res.status(200).send(image);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'Images')
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: '1000000' },
+  fileFilter: (req, file, cb) => {
+      const fileTypes = /jpeg|jpg|png|gif/
+      const mimeType = fileTypes.test(file.mimetype)  
+      const extname = fileTypes.test(path.extname(file.originalname))
+
+      if(mimeType && extname) {
+          return cb(null, true)
+      }
+      cb('Give proper files formate to upload')
+  }
+}).single('image')
+
+
+
+
+
 export default {
   addStudent,
   getAllStudents,
   getSingleStudent,
   updateStudent,
   deleteStudent,
+  upload,
+  addImage
 };
