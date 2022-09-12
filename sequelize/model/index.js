@@ -27,8 +27,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 import students from "./studentModel.js";
+import image from "./uploadImage.js";
+
+
 db.students = students(sequelize, DataTypes);
-// db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
+db.image = image(sequelize, DataTypes);
+
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done!");
