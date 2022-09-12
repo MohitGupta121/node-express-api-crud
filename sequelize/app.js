@@ -9,8 +9,7 @@ app.use(express.json());
 app.use("/", router);
 
 //static Images Folder
-app.use('/Images', express.static('./Images'))
-
+app.use("/Images", express.static("./Images"));
 
 const port = process.env.port || 8000;
 app.listen(port, () => console.log(`Listen on port ${port}`));

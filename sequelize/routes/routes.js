@@ -8,11 +8,11 @@ router.get("/getAll", controller.getAllStudents);
 
 router.get("/:id", controller.getSingleStudent);
 
-router.put('/:id', controller.updateStudent);
+router.put("/:id", controller.updateStudent);
 
-router.delete('/:id', controller.deleteStudent)
+router.delete("/:id", controller.deleteStudent);
 
-router.post('/addImage', controller.upload, controller.addImage)
+router.post("/addImage", controller.upload, controller.addImage);
 
 router.get("/image/:id", controller.getImage);
 
