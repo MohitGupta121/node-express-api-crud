@@ -113,6 +113,15 @@ const upload = multer({
 }).single('image')
 
 
+const getImage = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let image = await Image.findOne({ where: { id: id } });
+    res.status(200).send(image);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 
@@ -123,5 +132,6 @@ export default {
   updateStudent,
   deleteStudent,
   upload,
-  addImage
+  addImage,
+  getImage
 };

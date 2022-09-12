@@ -14,4 +14,6 @@ router.delete('/:id', controller.deleteStudent)
 
 router.post('/addImage', controller.upload, controller.addImage)
 
+router.get("/image/:id", controller.getImage);
+
 export default router;
