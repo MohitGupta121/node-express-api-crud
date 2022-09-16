@@ -82,7 +82,7 @@ const addImage = async (req, res) => {
     console.log(error);
   }
 };
-
+ 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "Images");
