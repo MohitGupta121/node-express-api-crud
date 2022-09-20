@@ -8,9 +8,9 @@ router.get("/getAll", controller.getAllStudents);
 
 router.get("/:id", controller.getSingleStudent);
 
-router.put("/:id", controller.updateStudent);
+router.put("/update/:id", controller.updateStudent);
 
-router.delete("/:id", controller.deleteStudent);
+router.delete("/delete/:id", controller.deleteStudent);
 
 router.post("/addImage", controller.upload, controller.addImage);
 
