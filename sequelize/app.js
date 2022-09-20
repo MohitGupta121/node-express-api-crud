@@ -1,9 +1,18 @@
 import express from "express";
 import router from "./routes/routes.js";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi  from "swagger-ui-express";
+import YAML from "yamljs";
+
 
 const app = express();
 
+const swaggerJSDocs = YAML.load("./service/api.yaml");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJSDocs));
+
 app.use(express.json());
+
+
 
 // Routers
 app.use("/", router);
