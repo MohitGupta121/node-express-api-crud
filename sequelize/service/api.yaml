@@ -1,0 +1,157 @@
+swagger: "2.0"
+info:
+  title: cms
+  description: this api contain .....
+  version: 1.0
+  contact:
+    email: cms@mohit.com
+  servers:
+    -url: http://localhost:8000/
+    description: this is local server
+schemes: [http,https]
+
+paths:
+  /getAll:
+    get:
+      summary: Return json objects of students
+      descriptions: it return objects
+      responses:
+        200:
+          descriptions: Success
+          schema:
+            type: array
+            items:
+              type: object
+
+
+  /{id}:
+    get:
+      summary: Returns a student by ID.
+      description: Returns the Specific User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses: 
+        '200':
+          description: OK
+
+
+  /addImage:
+    post:
+      tags:
+        - Upload
+      summary: Upload Image
+      parameters:
+          - in: formData
+            name: image
+            type: file
+            required: true
+      responses:
+        '200':
+          description: OK
+
+
+  /image/{id}:
+    get:
+      tags:
+        - Get Uploaded Image
+      summary: Image
+      parameters:
+          - in: path
+            name: id
+            type: integer
+            required: true
+      responses:
+        '200':
+          description: OK
+
+
+
+  /addNewStudent:
+    post:
+      summary: Return json objects of students
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: object
+            required:
+              - name
+              - lastname
+              - enroll
+              - mobile
+              
+            properties:
+              name:
+                type: string
+              lastname:
+                type: string
+              enroll:
+                type: string
+              mobile:
+                type: string    
+      responses:
+        '200':
+          description: OK
+
+
+  /delete/{id}:
+    delete:
+      summary: delete object from table
+      description: delete the Specific User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      responses: 
+        '200':
+          description: OK
+  
+  
+  /update/{id}:
+    put:
+      summary: Return json objects of students
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+        - in: body
+          name: body
+          schema:
+            type: object
+            required:
+              - name
+              - lastname
+              - enroll
+              - mobile
+              
+            properties:
+              name:
+                type: string
+              lastname:
+                type: string
+              enroll:
+                type: string
+              mobile:
+                type: string   
+      responses:
+        '200':
+          description: OK
