@@ -16,6 +16,7 @@ app.use(express.json());
 
 // Routers
 app.use("/", router);
+app.use("/", router);
 
 //static Images Folder
 app.use("/Images", express.static("./Images"));
