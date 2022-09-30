@@ -84,8 +84,8 @@ paths:
       consumes:
         - application/json
       parameters:
-        - name: id
-          in: path
+        - in: body
+          name: body
           schema:
             type: object
             required:
