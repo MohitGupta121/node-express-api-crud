@@ -2,6 +2,9 @@ import express from "express";
 import controller from "../controller/index.js";
 const router = express.Router();
 
+
+router.post("/login", controller.authStudent);
+
 router.post("/addNewStudent", controller.addStudent);
 
 router.get("/getAll", controller.getAllStudents);
