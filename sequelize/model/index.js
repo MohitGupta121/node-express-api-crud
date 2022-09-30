@@ -27,9 +27,11 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 import students from "./studentModel.js";
+import login from "./studentAuth.js";
 import image from "./uploadImage.js";
 
 db.students = students(sequelize, DataTypes);
+db.login = login(sequelize, DataTypes);
 db.image = image(sequelize, DataTypes);
 
 db.sequelize.sync({ force: false }).then(() => {
