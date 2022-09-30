@@ -1,11 +1,47 @@
 import db from "../model/index.js";
+import jwt from "jsonwebtoken"
 
 // image Upload
 import multer from "multer";
 import * as path from "path";
 
 const Student = db.students;
+const Login = db.login;
 const Image = db.image;
+
+
+// Auth User JWT
+const authStudent = (req, res) => {
+  const computer_code = req.body.computer_code;
+  const password = req.body.password;
+
+  Login.findOne({
+    where: {
+      computer_code: computer_code,
+    },
+  })
+    .then((data) => {
+      if (data != null) {
+        jwt.sign({data}, 'secretkey', (err, token) => {
+          res.json({
+            token
+          });
+        });
+      } else {
+        res.send({
+          data: data,
+          message: `incorrect credentials`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send({
+        message: "Error to connect from table ",
+      });
+    });
+};
+
 
 // 1. create student
 
@@ -119,6 +155,7 @@ const getImage = async (req, res) => {
 };
 
 export default {
+  authStudent,
   addStudent,
   getAllStudents,
   getSingleStudent,
