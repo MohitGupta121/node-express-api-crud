@@ -68,6 +68,11 @@ paths:
       responses:
         '200':
           description: OK
+          content: 
+            image/png:
+                schema:
+                    type: string
+                    format: binary
 
 
 
@@ -155,3 +160,52 @@ paths:
       responses:
         '200':
           description: OK
+
+
+
+  /login:
+     post:
+      tags:
+        - Auth
+      summary: authorization
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - computercode
+                - password
+            
+              properties:
+                computer_code:
+                  type: integer
+                password:
+                  type: string      
+        
+      responses:
+        200:
+          description: Successful Response
+        400:
+          description: User Error
+        500:
+          description: Internal Server Error        
+
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+
+security:
+ - Bearer: []
+
+securityDefinition:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: Authorization
