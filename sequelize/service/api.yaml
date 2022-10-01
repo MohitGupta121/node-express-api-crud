@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: "3.0.3"
 info:
   title: cms
   description: this api contain .....
